@@ -1,0 +1,169 @@
+<div class="alert alert-danger" *ngIf="message">
+    {{ message }}
+   </div>
+  <div class="alert alert-success" *ngIf="message1">
+    {{ message1 }}
+  </div>
+  <div class="col-md-4 offset-md-4 mt-4 mb-5">
+    
+  <div class="card pro">
+    <div class="card-header" style="background-color: lightgray">
+      <h4 style="color: blue;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+         Update the User Details 
+      </h4>
+    </div>
+
+  <div class="card-body bg-light">
+
+  <form #updateUserForm="ngForm" (ngSubmit)="updateUser(updateUserForm)">
+
+    <input type="hidden" name="userId" id="userId" #userId="ngModel"
+        [(ngModel)]="UserToUpdate.userId">
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="firstName">First Name* :</label>
+        <input type="text" class="form-control" name="firstName" id="firstName" pattern="^[A-Za-z\\s]{3,}[\\.]{0,1}[A-Za-z\\s]{0,}$" 
+          required #firstName="ngModel" [(ngModel)]="UserToUpdate.firstName" />
+        <div *ngIf="firstName.invalid && firstName.touched">
+          <small class="text-danger" *ngIf="firstName.errors.required">
+            <i>Please specify first name</i>
+          </small>
+          <small class="text-danger" *ngIf="firstName.errors.pattern">
+            <i>Firstname contains alphabets only, and atleast 3 characters</i>
+          </small>
+        </div>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="lastName">Last Name* :</label>
+        <input type="text" class="form-control" name="lastName" id="lastName" pattern="^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$" 
+          required #lastName="ngModel" [(ngModel)]="UserToUpdate.lastName" />
+        <div *ngIf="lastName.invalid && lastName.touched">
+          <small class="text-danger" *ngIf="lastName.errors.required">
+            <i>Please specify last name</i>
+          </small>
+          <small class="text-danger" *ngIf="lastName.errors.pattern">
+            <i>Last name contains alphabets only</i>
+          </small>
+        </div>
+      </div>
+    </div>
+  
+    <div class="form-group">
+    <div class="form-inline">
+      <label for="gender">Gender :</label> &nbsp; &nbsp;
+      <input type="radio" name="gender" value="male" required #gender="ngModel" 
+      [(ngModel)]="UserToUpdate.gender" /> &nbsp;
+      <label for="male">Male</label> &nbsp; &nbsp;
+      <input type="radio" name="gender" value="female" required #gender="ngModel" 
+      [(ngModel)]="UserToUpdate.gender" /> &nbsp;
+      <label for="female">Female</label> &nbsp; &nbsp;
+      <input type="radio" name="gender" value="others" required #gender="ngModel"
+      [(ngModel)]="UserToUpdate.gender" /> &nbsp;
+      <label for="others">Others</label> &nbsp; &nbsp;
+      <div *ngIf="gender.invalid">
+        <small *ngIf="gender.errors.required">
+          <i>(Please choose Gender)</i>
+        </small>
+      </div>
+    </div>
+  </div>
+  
+    <div class="form-group">
+      <label for="email"><i class="fa fa-address-book icon"></i> &nbsp;Email* :</label>
+      <input type="email" class="form-control" required email name="email" id="email" #email='ngModel'
+      [(ngModel)]="UserToUpdate.email" />
+      <div *ngIf= "email.invalid && email.touched">
+        <small class="text-danger"  *ngIf="email.errors.required">
+           <i>Please specify email</i>
+        </small>
+        <small class="text-danger"  *ngIf="email.errors.email">
+          <i>Please enter proper email format (ex:abc@gmail.com)</i>
+       </small>
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="Phone number"><i class="fa fa-phone-square icon"></i> &nbsp;Phone No.* :</label>
+      <input type="tel" class="form-control" pattern="[6-9]{1}[0-9]{9}" required
+         name="mobileNumber" id="mobileNumber" #mobileNumber='ngModel' [(ngModel)]="UserToUpdate.mobileNumber" />
+         <div *ngIf= "mobileNumber.invalid && mobileNumber.touched">
+           <small class="text-danger"  *ngIf="mobileNumber.errors.required">
+              <i>Please specify your phone number</i>
+           </small>
+           <small class="text-danger"  *ngIf="mobileNumber.errors.pattern">
+            <i>Phone number starts with 6-9 and contains 10 digits</i>  
+           </small>
+         </div>
+    </div>
+  
+  
+  <div class="row">
+    <div class="col-md-6">
+      <label for="userName"><i class="fa fa-user-circle icon"></i> &nbsp;Username* :</label>
+      <input type="text" name="userName" id="userName" class="form-control" required pattern="^[a-zA-Z0-9_-]{4,15}$"
+        #userName="ngModel" [(ngModel)]="UserToUpdate.userName">
+      <div *ngIf="userName.invalid && userName.touched">
+        <small class="text-danger" *ngIf="userName.errors.required">
+          <i>Please specify user name</i>
+        </small>
+        <small class="text-danger" *ngIf="userName.errors.pattern">
+          <i>Username consists of alphabets and numbers</i>
+        </small>
+      </div>
+    </div>
+  
+    <div class="col-md-6">
+    <label for="password"><i class="fa fa-key icon"></i> &nbsp;Password* :</label>
+    <div class="input-group mb-3">
+      <input [type]="passwordType" name="password" id="password" class="form-control" #password="ngModel" [(ngModel)]="UserToUpdate.password"
+      required pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">
+        <div class="input-group-append">
+          <span class="input-group-text" (click)='showPassword()'>
+            <i [class]="iconClass"></i>
+          </span>
+        </div>
+      <div *ngIf="password.invalid && password.touched">
+        <small class="text-danger" *ngIf="password.errors.required">
+          <i>Please specify password</i>
+        </small>
+        <small class="text-danger" *ngIf="password.errors.pattern">
+          <b>Suggest strong password</b> <br>
+          <i>password should consists of atleast 8 characters, one uppercase, lowercase, one special character</i>
+        </small>
+      </div>
+    </div>
+  </div>
+  </div>
+  
+  <div class="form-group">
+    <!-- <label for="role">Role :</label> &nbsp; &nbsp; -->
+    <input type="hidden" name="role" id="role" required #role='ngModel' [(ngModel)]="UserToUpdate.role"> 
+        <!-- <select class="custom-select" name="role" id="role" required #role='ngModel' ngModel>
+        <option value="ROLE_USER">User</option>
+      </select> -->
+  </div>
+  
+  <div class="form-group bg-light">
+    <button class="btn btn-danger float-left" type="button" (click)="goBack()">
+      Cancel
+    </button>
+      <button class="btn btn-primary float-right" type="submit" [disabled]="updateUserForm.invalid">
+        Update
+      </button>
+  </div>
+  
+  <br>
+  
+  </form>
+
+  <br>  
+
+</div>
+
+  </div>
+
+</div>
+  
+  

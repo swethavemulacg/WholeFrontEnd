@@ -1,0 +1,170 @@
+
+<!-- This is show the search form as well as the available flights -->
+<div class="flex-container" *ngIf="showSearchDiv">
+    <div >
+        <form name="formdata" #formdata="ngForm" novalidate>
+
+            <div class="card">
+                <div class="card-header bg-success">
+                    <h4 style="color: white;">Search Flights</h4>
+                  </div>
+
+                  <div class="card-body">
+            <div class="form-group">
+              <label for="from">*FROM</label>
+              <input type="text" name="from" [(ngModel)]="from" #flightFrom="ngModel" class="alert alert-danger" required pattern="[a-z]+"class="form-control" placeholder="ex. banglore">
+               </div>
+               <div *ngIf="flightFrom.invalid && flightFrom.touched"  style="font-size:85%;color: darkred">
+                  <span *ngIf="flightFrom.errors.required">*This is Mandatory</span>
+                  <span *ngIf="flightFrom.errors.pattern">*Please Enter Valid Input</span>
+                  </div>
+            <div class="form-group">
+              <label for="to">*TO</label>
+              <input type="text" name="to" [(ngModel)]="to" #flightTo="ngModel" required pattern="[a-z]+" class="form-control" placeholder="ex. pune">
+            </div>
+            <div *ngIf="flightTo.invalid && flightTo.touched" style="font-size:85%;color: darkred">
+                <span *ngIf="flightTo.errors.required">*This is Mandatory</span>
+                <span *ngIf="flightTo.errors.pattern">*Please Enter Valid Input</span>
+                </div>
+              </div>
+            <button type="submit" (click)="searchFlight(formdata.value)" class="btn btn-success" [disabled]="!formdata.valid" >Search</button>
+          </div>
+          </form>
+
+    </div>
+
+    <div>
+        <div *ngIf="errorVarForData" class="loading">
+            {{errorMessage}}
+       </div>
+        <div *ngIf="flights.length>0">
+          <div><span>*All Flights serve on a Daily Basis having enough seats for Booking</span>
+          </div>
+          <br>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Flight No</th>
+                    <th scope="col">From </th>
+                    <th scope="col">To </th>
+                    <th scope="col">Timing</th>
+                    <th scope="col">Ticket Price</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let flightData of flights">
+                    <td>{{flightData.flightId}}</td>                      
+                    <td>{{flightData.flightFrom}}</td>
+                    <td>{{flightData.flightTo}}</td>
+                    <td>{{flightData.flightTiming}}</td>
+                    <td>{{flightData.ticketCost}}</td>
+                    <td><button class="btn btn-success" (click)="toggleBooking(flightData)">Book</button></td>
+                  </tr>
+                </tbody>
+              </table>
+
+    </div> 
+  </div>
+</div>
+
+<!-- This div is having the form for booking flight ticket -->
+  <div *ngIf="showBookingDiv">
+
+      <div id="add booking">
+                
+          
+          <div id="formData" class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto  form p-3 white">
+
+            <form  name="formdata1" #formdata1="ngForm" novalidate (ngSubmit)="addBooking(formdata1)">
+                <div class="card">
+                    <div class="card-header bg-success">
+                        <h4 style="color: white;">Create Booking</h4>
+                      </div>
+              <div class="card-body">
+              <div *ngIf="errorMessageWhileBookingDiv" class="alert alert-danger">
+                {{errorMessageWhileBooking}}
+                </div>
+             
+              <div><b> *Full Name</b>
+             <input type="text" placeholder="Enter Full Name Same As Your Govt Id Proof" id="fname" name="fullName"  [(ngModel)]="bookingDetails.nameOfPassenger" #fNamee="ngModel" required pattern="^[A-Z]{1}[A-Za-z\s][\.]{0,1}[A-Za-z\s]{0,}$" class="form-control border border-dark" >
+              <div *ngIf="fNamee.invalid && fNamee.touched" class="text-danger">
+                <span *ngIf="fNamee.errors.required">*Name is Mandatory</span>
+                <span *ngIf="fNamee.errors.pattern">*Please Enter Valid Name Ex. Ashok Sharma, A Sharma, A sharma....</span>
+                </div>
+            
+            </div>
+            <br>
+            <div><b>*Age</b>
+              <input type="text" placeholder="Enter age" id="age" name="age"   [(ngModel)]="bookingDetails.ageOfPassenger" #age="ngModel" required pattern="(^[0][1-9]+)|([1-9]\d*)"  class="form-control border border-dark" >
+              <div *ngIf="age.invalid && age.touched" class="text-danger">
+                <span *ngIf="age.errors.required">*Age is Mandatory</span>
+                <span *ngIf="bookingDetails.ageOfPassenger<0">*Please Enter Valid Age Ex. 10,22...</span>
+                <span *ngIf="age.errors.pattern ">*Please Enter Valid Age Ex. 10,22...</span>
+                <span *ngIf="age.value<0">Please </span>
+                </div>
+            </div>
+            
+          <br>
+          <div class="form-group"><b>*Gender</b><br>&nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="radio" name="gender" [(ngModel)]="bookingDetails.genderOfPassenger" value="Male">&nbsp;&nbsp;&nbsp;&nbsp;Male &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="radio" name="gender" [(ngModel)]="bookingDetails.genderOfPassenger" value="Female">&nbsp;&nbsp;&nbsp;&nbsp;Female
+          
+          </div>
+
+          
+          <div><b>*Booking Date</b>
+            <input type="date" [min]="getToday()" placeholder="" id="datee" name="datee"   [(ngModel)]="bookingDetails.dateOfFlight"  #datee="ngModel" required  class="form-control border border-dark " >
+            <div *ngIf="datee.invalid && datee.touched" class="text-dangers">
+              <span *ngIf="datee.errors.required">*Date is Mandatory</span>
+              </div>
+          </div>
+          
+<br>
+          <div><b>*Booking From</b>
+            <input type="text" placeholder="" id="ff" name="ffrom"   [(ngModel)]="bookingDetails.flightFrom" disabled   #ffrom="ngModel"  class="form-control border border-dark " >
+           </div>
+ <br>
+          <div><b>*Flight No</b>
+            <input type="text" placeholder="" id="tt" name="tto" value={{flightId}}  disabled  class="form-control border border-dark " >
+           </div>
+          </div>
+           
+           
+            <div style="padding:0 0 2% 15%">
+            <input type="submit" class="btn btn-success" value="Book" id="submit" [disabled]="!formdata1.valid" style="width: 35%">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="button" (click)="toggleShowList()"  class="btn btn-primary" style="width: 35%" value="Back">
+            
+          </div>
+          </div>
+          </form>
+          </div>
+         </div>
+        </div>
+
+ 
+  <!-- This div be visible to user when ticket will be booked successfully -->
+        <div class="modal" *ngIf="showModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title"> Booking Details</h4>
+              </div>
+              <div class="modal-body">
+                <p>{{bookingSuccessMessage}}</p>
+                <p>{{bookingDetails.costOfTicket}} has been debited from your account XXXXX3254</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-danger" (click)="closeModal()">Close</button>
+               
+              </div>
+            </div>
+          </div>
+        </div>    
+
+
+
+
+
+

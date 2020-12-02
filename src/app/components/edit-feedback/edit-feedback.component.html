@@ -1,0 +1,126 @@
+<div class="alert alert-success" *ngIf="message1">
+  {{message1}}
+</div>
+<div class="alert alert-danger" *ngIf="message">
+  {{message}}
+</div>
+
+<div class="col-md-4 offset-md-4 mt-4 mb-4">
+          <h4 style="font-family:Arial, Helvetica, sans-serif">
+             <b style="color: blue;">
+              Update Feedback
+             </b> 
+          </h4>
+          <hr>
+      <form  #editFeedbackForm = "ngForm" (ngSubmit)="updateFeedback(editFeedbackForm)">
+
+        <input type="hidden" class="form-control" name="fid" id="fid"
+          #fid="ngModel" [(ngModel)]="FeedbackToUpdate.fid">
+
+      <div class="form-group">
+            <label for="name"><b>Enter Your Name :</b></label>
+           <input type="text" class="form-control" id="name" name="name"
+           required #name='ngModel' [(ngModel)]="FeedbackToUpdate.name" />
+            <div *ngIf = 'name.invalid && name.touched'> 
+              <small class="text-danger" *ngIf='name.errors.required'>
+                <i>Please enter your name</i>
+              </small>
+            </div>
+      </div>
+
+      <label for="type"><b>1. How was the airline refund policy ?</b></label> <br>
+        <div class="form-inline">
+          <input type="radio" name="policy" value="UnSatisfied"  required #policy="ngModel" 
+          [(ngModel)]="FeedbackToUpdate.policy" /> &nbsp;
+          <label for="UnSatisfied" style="color:red">UnSatisfied</label> &nbsp; &nbsp;
+          <input type="radio" name="policy" value="Average" required #policy="ngModel"
+          [(ngModel)]="FeedbackToUpdate.policy" /> &nbsp;
+          <label for="average" style="color: blue;">Average</label> &nbsp; &nbsp;
+          <input type="radio" name="policy" value="Good" required  #policy="ngModel" 
+          [(ngModel)]="FeedbackToUpdate.policy" /> &nbsp;
+          <label for="good" style="color:darkgreen;">Good</label>
+        </div>
+        <br>
+        
+      <label for="type"><b>2. Were your expectations met, unmet, or exceeded ?</b></label> <br>
+        <div class="form-inline">
+          <input type="radio" name="expectations" value="Unmet" required #expectations="ngModel" 
+          [(ngModel)]="FeedbackToUpdate.expectations" /> &nbsp;
+          <label for="unmet" style="color: red;">Unmet</label> &nbsp; &nbsp;
+          <input type="radio" name="expectations" value="Met" required #expectations="ngModel" 
+          [(ngModel)]="FeedbackToUpdate.expectations" /> &nbsp;
+          <label for="met" style="color: blue">Met</label> &nbsp; &nbsp;
+          <input type="radio" name="expectations" value="Exceeded" required #expectations="ngModel"
+          [(ngModel)]="FeedbackToUpdate.expectations" /> &nbsp;
+          <label for="exceeded" style="color: darkgreen;">Exceeded</label>
+        </div>
+        <br>
+  
+        
+      <label for="interaction"><b>3.How would you rate your overall satisfaction with us ?</b></label> <br>  
+      <div class="form-inline">
+        <input type="radio" name="interaction" value="1" required #interaction="ngModel"
+        [(ngModel)]="FeedbackToUpdate.interaction" /> &nbsp;
+        <label for="1" style="color:red">1</label> &nbsp; &nbsp;
+        <input type="radio" name="interaction" value="2" required #interaction="ngModel"
+        [(ngModel)]="FeedbackToUpdate.interaction" /> &nbsp;
+        <label for="2" style="color:brown;">2</label> &nbsp; &nbsp;
+        <input type="radio" name="interaction" value="3" required #interaction="ngModel"
+        [(ngModel)]="FeedbackToUpdate.interaction" /> &nbsp;
+        <label for="3" style="color:blue">3</label> &nbsp; &nbsp;
+        <input type="radio" name="interaction" value="4" required #interaction="ngModel"
+        [(ngModel)]="FeedbackToUpdate.interaction" /> &nbsp;
+        <label for="4" style="color:purple">4</label> &nbsp; &nbsp;
+        <input type="radio" name="interaction" value="5" required #interaction="ngModel"
+        [(ngModel)]="FeedbackToUpdate.interaction" /> &nbsp;
+        <label for="5" style="color:darkgreen;">5</label>
+      </div>  
+      <br> 
+      
+      <label for="type"><b>4. Was our website easy to use ?</b></label> <br>
+        <div class="form-inline">
+          <input type="radio" name="website" value="Yes" required #website="ngModel" 
+          [(ngModel)]="FeedbackToUpdate.website" /> &nbsp;
+          <label for="yes" style="color: darkgreen;">Yes</label> &nbsp; &nbsp;
+          <input type="radio" name="website" value="No" required #website="ngModel"
+          [(ngModel)]="FeedbackToUpdate.website" /> &nbsp;
+          <label for="no" style="color: red;">No</label>
+        </div>
+        <br>
+  
+      <label for="type"><b>5. How likely would you be to recommend this business to a friend?</b></label> <br>
+        <div class="form-inline">
+          <input type="radio" name="recommend" value="Not Likely" required #recommend="ngModel"
+          [(ngModel)]="FeedbackToUpdate.recommend" /> &nbsp;
+          <label for="notLikely" style="color: red;">Not Likely</label> &nbsp; &nbsp;
+          <input type="radio" name="recommend" value="Likely" required #recommend="ngModel"
+          [(ngModel)]="FeedbackToUpdate.recommend" /> &nbsp;
+          <label for="likely" style="color: blue;">Likely</label> &nbsp; &nbsp;
+          <input type="radio" name="recommend" value="Very Likely" required #recommend="ngModel"
+          [(ngModel)]="FeedbackToUpdate.recommend" /> &nbsp;
+          <label for="veryLikely" style="color: darkgreen;">
+            Very Likely
+          </label>   
+        </div>
+        <br>
+  
+      <label for="review"><b>Add more comments :</b></label>
+      <div class="form-group">
+          <textarea class="form-control" name="review" id="review" rows="3" #review='ngModel' [(ngModel)]="FeedbackToUpdate.review">
+          </textarea>
+      </div>
+      
+      <div class="form-group">
+        <button class="btn btn-success float-left" (click)="goBack()">
+          Go Back
+        </button>
+        <button class="btn btn-primary float-right" [disabled]="editFeedbackForm.invalid">
+          Update
+        </button>
+    </div>
+      
+      </form>
+      
+  </div>
+      
+  

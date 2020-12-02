@@ -1,0 +1,83 @@
+
+<!-- This div will be shown till the time any response comes from backend -->
+
+<div *ngIf="loading" class="loading">
+    Loading ...
+  </div>
+
+
+<!-- This div will show the exception handled message -->
+ <div *ngIf="errorVarForData" class="loading">
+     {{errorMessage}}
+</div>
+
+<!-- This will show the booking history if there is booking history  -->
+<div *ngIf="bookingHistory.length>0">
+  
+  <!-- This will take the input value for pipe to filter -->
+
+  <div class="form-group">
+    <div class="col-sm-3 float-sm-right">
+      <input type="text" class="form-control" [(ngModel)]="searchValue" id="username" placeholder="Search By Name, User Id or Booking Id">   
+    </div>
+  </div>
+   
+      <br><br>
+<table class="table">
+        <thead>
+          <tr>
+              <th scope="col">Booking Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Age</th>
+            <th scope="col">From </th>
+            <th scope="col">To </th>
+            <th scope="col">Flight Time</th>
+            <th scope="col">Flight Date</th>
+            <th scope="col">Flight No</th>
+            <th scope="col">Ticket Price</th>
+            <th scope="col">User Id</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let bookingHistoryData of bookingHistory | bookingPipe:searchValue" >
+            <td>{{bookingHistoryData.bookingId}}</td>
+            <td >{{bookingHistoryData.nameOfPassenger}}</td>
+            <td>{{bookingHistoryData.ageOfPassenger}}</td>
+            <td>{{bookingHistoryData.flightFrom}}</td>
+            <td>{{bookingHistoryData.flightTo}}</td>
+            <td> {{bookingHistoryData.timeOfFlight}} </td>
+
+            <!-- This date  pipe is predefined pipe in angular to show date in special format -->
+            <td> {{bookingHistoryData.dateOfFlight | date}}  </td>
+
+            <td>{{bookingHistoryData.flightDetails.flightId}}</td>
+            <td>{{bookingHistoryData.costOfTicket}}</td>
+            <td>{{bookingHistoryData.userDetails.userId}}</td>
+            <td *ngIf="bookingHistoryData.dateOfFlight>compareDate && bookingHistoryData.isCancelled==0"><button class="btn btn-danger"   (click)="openDialog(bookingHistoryData.bookingId)">Cancell</button></td>
+            <td *ngIf="bookingHistoryData.dateOfFlight<=compareDate && bookingHistoryData.isCancelled==0"><button class="btn btn-success">Travelled</button></td>
+            <td *ngIf="bookingHistoryData.isCancelled==1"><button class="btn btn-primary">Cancelled</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+<!-- This Div will be used to ask user for confirmation of cancell ticket     -->
+
+    <div class="modal" *ngIf="showModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Cancell Booking</h4>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to cancell the Booking?</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-danger" (click)="cancellBooing()">Delete</button>
+            <button class="btn btn-default" (click)="closeDialog()">Close</button>
+             
+          </div>
+        </div>
+      </div>
+      </div>

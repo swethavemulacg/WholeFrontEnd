@@ -1,0 +1,65 @@
+<div class="float-left mt-2">
+    <h4 style="font-family:Arial, Helvetica, sans-serif;">
+      &nbsp; &nbsp; List of Feedbacks :
+    </h4>
+</div>
+
+<br>
+
+<div class="row float-right">
+<h5 class="float-left">Search By :</h5> &nbsp; &nbsp;
+
+<div class="form-group">
+<select class="form-control" name="" id="" [(ngModel)]="searchBy">
+  <option value="interaction">Customer's Rating</option>
+  <option value="name">Customer Name</option>
+</select>
+
+</div> &nbsp; &nbsp; &nbsp; &nbsp;
+<div class="form-group">
+<input type="text" class="form-control" placeholder="Search here . ." [(ngModel)]="searchValue">
+</div> &nbsp; &nbsp; &nbsp; &nbsp;
+</div>
+
+<br>
+<br>
+
+<div class="col-md-4 mt-2 float-left" *ngFor = "let feedback of feedbacks | feedbackSearch : searchValue : searchBy">
+
+<div class="card mt-4">
+<div class="card-header" style="background-color:lightgreen">
+    <h5>
+    <i> Feedback </i> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQvo9AFrnnifIMs4cLZbIkNibNMZD6r4TFriQ&usqp=CAU" alt=""
+          height="40" width="50" style="border-radius: 150%;"> 
+    </h5>
+</div>
+
+<div class="card-body bg-light" style="height:380px; width: auto;">
+<p style="color: brown;">
+ Posted by : <b>{{feedback.name}}</b>  <br>
+</p>
+<hr>
+
+<p>
+ Were your expectations met, unmet, or exceeded : <i style="color: blue;">{{feedback.expectations}}</i> <br>
+</p>
+<p>
+ How was the refund policy : <i style="color: blue;">{{feedback.policy}}</i> <br>
+</p>
+<p>
+ How would you rate your overall satisfaction with us : <b style="color: blue;">{{feedback.interaction}} / 5 </b> <br>
+</p>
+<p>
+ Was the website easy to use : <i style="color: blue;">{{feedback.website}}</i> <br>
+</p>
+<p>
+ How likely would you be to recommend this business to a friend : <i style="color: blue;"> {{feedback.recommend}}</i> <br>
+</p>
+<p>
+ Review : <i style="color: blue;">{{feedback.review}}</i>
+</p>
+</div>
+
+</div>
+</div>

@@ -1,0 +1,49 @@
+
+<br/>
+<br/>
+<h2 style="text-align:center">
+  Airline Refund Policies
+</h2>
+
+<div class="container">
+  <div class="header_wrap">
+    <div class="num_rows">
+   
+    </div>
+    
+  </div>
+
+  <br>
+
+  <table class="table table-bordered table-hover" id="table-id">
+    <thead>
+      <tr style="background-color:lightgreen">
+        <th >Policy Id</th>
+        <th >TimePeriod</th>
+        <th >Refund Percentage</th>
+        <th >Airline Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let r of refunds">
+        
+        <td>{{r.policyID}}</td>
+        <td>{{r.timePeriod}}</td>
+        <td>{{r.refundPercentage}}</td>
+        <td>{{r.airlineName}}</td>
+    
+     </tr>
+    <tbody>
+  </table>
+
+  <!--		Start Pagination -->
+  <div class='pagination-container'>
+    <nav>
+      <ul class="pagination">
+        <!--	Here the JS Function Will Add the Rows -->
+      </ul>
+    </nav>
+  </div>
+
+
+</div> <!-- 		End of Container -->

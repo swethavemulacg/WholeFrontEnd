@@ -1,0 +1,52 @@
+<div id="page">
+    <div class="col-md-4 offset-md-4 mt-4">
+    <form #RefundForm='ngForm' (ngSubmit)="getRefund()">
+        <!-- (ngSubmit)="getRefund(bookingId)"-->
+        <br>
+        <label for="BookingId"><b>Enter Your BookingId :</b></label>
+        <div class="form-group">
+            <input type="text" class="form-control" id="bookingId" name="bookingId" #name='ngModel' ngModel
+                [(ngModel)]="bookingId" required>
+            <div *ngIf='name.invalid && name.touched'>
+                <small class="text-danger" *ngIf='name.errors.required'>
+                 <i>Please enter your Booking Id</i>
+                </small>
+            </div>
+            <br>
+            <input class="btn btn-success" type="submit" value="RefundDetails" />
+        </div>
+    </form>
+    </div>
+
+    <div class="container">
+            <h5>
+                Your Refund Details:
+            </h5>
+
+            <table class="table table-bordered table-striped" width=100%>
+                <thead style="background-color:cadetblue;">
+                    <tr>
+                        <th>BookingId</th>
+                        <th>FlightFrom</th>
+                        <th>FlightTo</th>
+                        <th>PassengerAge</th>
+                        <th>PassengerName</th>
+                        <th>RefundAmount</th>
+                        <th>TicketCost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let r of refundDetails">
+                        <th>{{r.bookingId}}</th>
+                        <th>{{r.flightFrom}}</th>
+                        <th>{{r.flightTo}}</th>
+                        <th>{{r.passengerAge}}</th>
+                        <th>{{r.passengerName}}</th>
+                        <th>{{r.refundAmount}}</th>
+                        <th>{{r.ticketCost}}</th>
+                    </tr>
+                </tbody>
+            </table>
+        
+    </div>
+</div>

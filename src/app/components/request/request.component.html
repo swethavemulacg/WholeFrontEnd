@@ -1,0 +1,91 @@
+<div class="p-3 mb-2" style="background-color: honeydew;">
+    <div class="alert alert-success" *ngIf="message1">
+      {{message1}}
+    </div>
+    <div class="alert alert-danger" *ngIf="message">
+      {{message}}
+    </div>
+    <div class="col-md-4 offset-md-4 mt-4">
+    <div class="card">
+
+    <div class="card-header" style="background-color: lightgreen;">
+      <h4 style="font-family:Arial, Helvetica, sans-serif">
+        <b style="color: blue;">
+          Add Refund Policy
+        </b>
+      </h4>
+    </div>
+
+    <div class="card-body">
+      <form #RefundForm='ngForm' (ngSubmit)="postRefundData(RefundForm)">
+        <div class="form-group">
+  
+          <label for="PolicyId">Enter PolicyId :</label>
+          <input type="text" class="form-control" id="policyID" name="policyID" #policyID='ngModel' ngModel  required>
+          <div *ngIf='policyID.invalid && policyID.touched'>
+            <small class="text-danger" *ngIf='policyID.errors.required'>
+              <i>Please enter your PolicyId</i>
+            </small>
+            <small class="text-danger" *ngIf='policyID.errors.pattern'>
+              <i>Please enter numbers only</i>
+            </small>
+          </div>
+          <br />
+  
+          <label for="TimePeriod">Enter TimePeriod :</label>
+          <input type="text" class="form-control" id="timePeriod" name="timePeriod" #timePeriod='ngModel' ngModel
+           required>
+          <div *ngIf='timePeriod.invalid && timePeriod.touched'>
+            <small class="text-danger" *ngIf='timePeriod.errors.required'>
+              <i>Please enter Time Period</i>
+            </small>
+            <small class="text-danger" *ngIf='timePeriod.errors.pattern'>
+              <i>Please enter numbers only</i>
+            </small>
+          </div>
+          <br />
+  
+  
+          <label for="RefundPercentage">Enter RefundPercentage :</label>
+          <input type="text" class="form-control" id="refundPercentage" name="refundPercentage" #refundPercentage='ngModel' ngModel
+           required>
+          <div *ngIf='refundPercentage.invalid && refundPercentage.touched'>
+            <small class="text-danger" *ngIf='refundPercentage.errors.required'>
+              <i>Please Enter Refund percentage</i>
+            </small>
+            <small class="text-danger" *ngIf='refundPercentage.errors.pattern'>
+              <i>Please enter numbers only</i>
+            </small>
+          </div>
+          <br />
+
+          <label for="AirlineName">Enter Airline Name :</label>
+          <input type="text" class="form-control" id="airlineName" name="airlineName"  pattern="^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$" 
+            #airlineName='ngModel' ngModel required>
+          <div *ngIf='airlineName.invalid && airlineName.touched'>
+            <small class="text-danger" *ngIf='airlineName.errors.required'>
+              <i>Please enter your airline name</i>
+            </small>
+            <small class="text-danger" *ngIf='airlineName.errors.pattern'>
+              <i>Please enter alphabets only</i>
+            </small>
+          </div>
+  
+        </div>
+  
+        <div class="form-group">
+          <button class=" btn btn-success float-left" type="submit" [disabled]="RefundForm.invalid">
+            Submit
+          </button> &nbsp; &nbsp; &nbsp; &nbsp;
+          <button class="btn btn-danger" type="reset">
+            Reset
+          </button>
+        </div>
+  
+      </form>
+
+    </div>
+  
+    </div>
+  </div>
+  </div>

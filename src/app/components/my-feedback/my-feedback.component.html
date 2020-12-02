@@ -1,0 +1,55 @@
+<div class="form-control" style="background-color: green;" *ngIf="message">
+    <i style="color: white;">
+        {{message}}
+    </i>
+</div>
+<div class="col-md-4 mt-4 float-left" *ngFor = "let feedback of feedbacks">
+    <div class="card">
+    <div class="card-header" style="background-color:lightgreen">
+        
+        <h5>
+        <small>{{feedback.fid}}</small> &nbsp;
+        <i>My Feedback </i>
+            <button class="btn btn-outline-danger float-right" (click)='deleteFeedback(feedback)'>
+               <i class="fa fa-trash"></i>
+            </button>
+        </h5> 
+    </div>
+    
+    <div class="card-body bg-light" style="height:450px; width: auto;">
+    <p style="color: brown;">
+     Posted by : <b>{{feedback.name}}</b>  <br>
+    </p>
+    <hr>
+
+    <p>
+        How was the refund policy : <i style="color: blue;">{{feedback.policy}}</i> <br>
+       </p>
+    <p>
+     Were your expectations met, unmet, or exceeded : <i style="color: blue;">{{feedback.expectations}}</i> <br>
+    </p>
+    
+    <p>
+     How would you rate your overall satisfaction with us : <b style="color: blue;">{{feedback.interaction}} / 5</b> <br>
+    </p>
+    <p>
+     Was our website easy to use : <i style="color: blue;">{{feedback.website}}</i> <br>
+    </p>
+    <p>
+     How likely would you be to recommend this business to a friend : <i style="color: blue;"> {{feedback.recommend}}</i> <br>
+    </p>
+    <p>
+     Review : <i style="color: blue;">{{feedback.review}}</i>
+    </p>
+
+    
+<hr>
+    <button class="btn btn-outline-success float-right" (click)='selectFeedback(feedback)'>
+      <i class="fa fa-edit "></i>
+    </button>
+
+    </div>
+    
+    </div>
+    </div>
+    

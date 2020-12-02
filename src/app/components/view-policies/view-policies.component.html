@@ -1,0 +1,54 @@
+
+<br/>
+<br/>
+<h2 style="text-align:center">
+  Airline Refund Policies
+</h2>
+
+<div class="container">
+  <div class="header_wrap">
+    <div class="num_rows">
+   
+    </div>
+    
+  </div>
+  <button class="btn btn-primary float-right" (click)='refreshData()'><i class="fa fa-refresh"><b>Refresh</b></i>
+  </button>
+  
+  <br>
+
+  <table class="table table-bordered table-hover" id="table-id">
+    <thead>
+      <tr style="background-color:lightgreen">
+        <th >Policy Id</th>
+        <th >Time Period</th>
+        <th >Refund Percentage</th>
+        <th >Airline Name</th>
+        <th >Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let r of refunds">
+        
+        <td>{{r.policyID}}</td>
+        <td>{{r.timePeriod}}</td>
+        <td>{{r.refundPercentage}}</td>
+        <td>{{r.airlineName}}</td>
+        <td>
+          <input class="btn btn-outline-danger" type='button' value='delete' (click)='deletePolicy(r.policyID)'>
+        </td> 
+     </tr>
+    <tbody>
+  </table>
+
+  <!--		Start Pagination -->
+  <div class='pagination-container'>
+    <nav>
+      <ul class="pagination">
+        <!--	Here the JS Function Will Add the Rows -->
+      </ul>
+    </nav>
+  </div>
+
+
+</div> <!-- 		End of Container -->

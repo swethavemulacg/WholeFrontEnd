@@ -1,0 +1,69 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-success">
+    <a class="navbar-brand" routerLink="#">Airline Refund Policy</a>
+    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/customer" *ngIf='userService.isUser()'>Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/home" *ngIf='userService.isAdmin()'>Home</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/showBookingHistoryForUser" *ngIf='userService.isUser()'>Booking</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/showBookingHistory" *ngIf='userService.isAdmin()'>Booking</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/add-feedback" *ngIf='userService.isUser()'>GiveFeedback</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/get-feedbacks" *ngIf='userService.isAdmin()'>Feedback Reports</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/my-feedback" *ngIf='userService.isUser()'>My Feedback</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/refund-policies" *ngIf='userService.isUser()'>Refund Policies</a>
+            </li>
+            
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/request-refund" *ngIf='userService.isAdmin()'>Add Refund Policy</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/policies" *ngIf='userService.isUser()'>View Policies</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/view-policies" *ngIf='userService.isAdmin()'>View Policies</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/refunds" *ngIf='userService.isUser()'>Help for Refund</a>
+            </li>
+        </ul>
+        
+        <ul class="navbar-nav">
+            <li class="nav-item active" *ngIf='!userService.isLogged()'>
+                <a class="nav-link" routerLink="/register-form"> Register</a>
+              </li>
+              <li class="nav-item active" *ngIf='userService.isLogged() && userService.isAdmin()'>
+                <a class="nav-link" routerLink="/admin-form"> Add-admin</a>
+              </li>
+              <li class="nav-item active" *ngIf='userService.isUser()'>
+                <a class="nav-link" routerLink="/profile"><i class="fa fa-user-circle icon"></i> Profile</a>
+            </li>
+            <li class="nav-item active" *ngIf='!userService.isLogged()'>
+              <a class="nav-link" routerLink="/login-form"> <i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
+            </li>
+            <li class="nav-item active" *ngIf='userService.isLogged()'>
+              <a class="nav-link" style="cursor: pointer;" (click)="userService.logout()">
+                <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
+              </a>
+            </li>
+          </ul>
+
+    </div>
+</nav>

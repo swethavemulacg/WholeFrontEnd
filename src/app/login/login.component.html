@@ -1,0 +1,79 @@
+<div style="background-image: url('https://wallpapercave.com/wp/wp6581241.jpg');
+    background-size: cover;">
+
+<br>
+
+<div class="alert alert-danger" *ngIf='message'>
+    {{ message }}
+  </div>
+  <div class="col-md-4 offset-md-4 mt-4">
+  
+    <form #loginForm="ngForm" (ngSubmit)="loginDetails(loginForm)">
+  
+      <div class="card">
+  
+        <div class="card-header bg-success">
+          <h4 style="color: white;">Welcome !!</h4>
+        </div>
+  
+        <div class="card-body">
+          <label for="email"> <i class="fa fa-envelope icon"></i> &nbsp;Email </label>
+          <div class="form-group">     
+            <input type="email" name="email" id="email" placeholder="Enter your Email" email
+              class="form-control" required minlength="5" #email='ngModel' ngModel />
+              <div *ngIf= "email.invalid && email.touched">
+                <small class="text-danger" *ngIf="email.errors.required">
+                  <i>Please specify email</i>
+                </small>
+                <small class="text-danger" *ngIf="email.errors.email">
+                  Please enter proper format(ex: abcd@gmail.com)
+                </small>
+              </div>
+          </div>
+  
+          <label for="password"> <i class="fa fa-key icon"></i> &nbsp;Password </label>
+          <div class="input-group mb-3">
+            <input [type]="passwordType" name="password" id="password" placeholder="Enter your Password" class="form-control" required
+               pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" #password='ngModel' ngModel />
+               <div class="input-group-append">
+                  <span class="input-group-text" (click)='showPassword()'>
+                    <i [class]="iconClass"></i>
+                  </span>
+               </div>
+               <div *ngIf= "password.invalid && password.touched">
+                <small class="text-danger" *ngIf="password.errors.required">
+                  <i>Please enter password</i>
+                </small>
+                <small class="text-danger" *ngIf="password.errors.pattern">
+                  <i>Password consists of atleast 8 characters, one uppercase, one special characters</i>
+                </small>
+              </div>
+          </div>
+  
+        </div>
+  
+        <div class="container">
+          &nbsp; <a routerLink="/reset-form">Forgot password ??</a> &nbsp; &nbsp; &nbsp;  
+          <button type="submit" class="btn btn-primary float-right" [disabled]="loginForm.invalid">
+            Login
+          </button>
+        </div>
+  
+      </div>
+  
+    </form>
+  </div>
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+
+</div>
+

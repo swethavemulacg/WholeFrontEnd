@@ -1,0 +1,131 @@
+<div style="background-image: url('https://wallpapercave.com/wp/wp6581241.jpg');
+    background-size: cover;">
+
+<br>
+
+<div class="col-md-4 offset-md-2 mt-2">
+        <h4 style="font-family:Arial, Helvetica, sans-serif, Times, serif;">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQvo9AFrnnifIMs4cLZbIkNibNMZD6r4TFriQ&usqp=CAU" alt=""
+          height="70" width="90" style="border-radius: 150%;"> &nbsp;
+           <b style="color:blue">
+            Give Your Feedback !!
+           </b> &nbsp;
+           <!-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQvo9AFrnnifIMs4cLZbIkNibNMZD6r4TFriQ&usqp=CAU" alt=""
+            height="70" width="90" style="border-radius: 150%;"> -->
+        </h4>
+
+    <div class="card">
+
+    <div class="card-body bg-light">
+    <form  #feedbackForm = 'ngForm' (ngSubmit)="postFeedback(feedbackForm)">
+    <div class="form-group">
+          <label for="name">Enter Your Name :</label>
+         <input type="text" class="form-control" id="name" name="name" pattern="^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$"
+          #name='ngModel' ngModel required>
+          <div *ngIf = 'name.invalid && name.touched'> 
+            <small class="text-danger" *ngIf='name.errors.required'>
+              <i>Please enter your name</i>
+            </small>
+            <small class="text-danger" *ngIf='name.errors.pattern'>
+              <i>Please enter alphabets only</i>
+            </small>
+          </div>
+    </div>
+    
+      <label for="type">1. How was the airline refund policy ?</label> <br>
+      <div class="form-inline">
+        <input type="radio" name="policy" value="UnSatisfied" required #policy="ngModel" ngModel /> &nbsp;
+        <label for="UnSatisfied" style="color:red">UnSatisfied</label> &nbsp; &nbsp;
+        <input type="radio" name="policy" value="Average" required #policy="ngModel" ngModel /> &nbsp;
+        <label for="average" style="color: blue;">Average</label> &nbsp; &nbsp;
+        <input type="radio" name="policy" value="Good" required #policy="ngModel" ngModel /> &nbsp;
+        <label for="good" style="color:darkgreen;">Good</label>
+      </div>
+      <br>
+
+      <label for="type">2. Were your expectations met, unmet, or exceeded ?</label> <br>
+      <div class="form-inline">
+        <input type="radio" name="expectations" value="Unmet" required #expectations="ngModel" ngModel /> &nbsp;
+        <label for="unmet" style="color: red;">Unmet</label> &nbsp; &nbsp;
+        <input type="radio" name="expectations" value="Met" required #expectations="ngModel" ngModel /> &nbsp;
+        <label for="met" style="color: blue">Met</label> &nbsp; &nbsp;
+        <input type="radio" name="expectations" value="Exceeded" required #expectations="ngModel" ngModel /> &nbsp;
+        <label for="exceeded" style="color: darkgreen;">Exceeded</label>
+      </div>
+      <br>
+
+      
+    <label for="interaction">3. How would you rate your overall satisfaction with us ?</label> <br>  
+    <div class="form-inline">
+      <input type="radio" name="interaction" value="1" required #interaction="ngModel" ngModel /> &nbsp;
+      <label for="1" style="color:red">1</label> &nbsp; &nbsp;
+      <input type="radio" name="interaction" value="2" required #interaction="ngModel" ngModel /> &nbsp;
+      <label for="2" style="color:brown;">2</label> &nbsp; &nbsp;
+      <input type="radio" name="interaction" value="3" required #interaction="ngModel" ngModel /> &nbsp;
+      <label for="3" style="color:blue">3</label> &nbsp; &nbsp;
+      <input type="radio" name="interaction" value="4" required #interaction="ngModel" ngModel /> &nbsp;
+      <label for="4" style="color:purple">4</label> &nbsp; &nbsp;
+      <input type="radio" name="interaction" value="5" required #interaction="ngModel" ngModel /> &nbsp;
+      <label for="5" style="color:darkgreen;">5</label>
+    </div>
+    <br>
+
+    <label for="type">4. Was our website easy to use ?</label> <br>
+      <div class="form-inline">
+        <input type="radio" name="website" value="Yes" required #website="ngModel" ngModel /> &nbsp;
+        <label for="yes" style="color: darkgreen;">Yes</label> &nbsp; &nbsp;
+        <input type="radio" name="website" value="No" required #website="ngModel" ngModel /> &nbsp;
+        <label for="no" style="color: red;">No</label>
+      </div>
+      <br>
+
+    <label for="type">5. How likely would you be to recommend this application to a friend?</label> <br>
+      <div class="form-inline">
+        <input type="radio" name="recommend" value="Not Likely" required #recommend="ngModel" ngModel /> &nbsp;
+        <label for="notLikely" style="color: red;">Not Likely</label> &nbsp; &nbsp;
+        <input type="radio" name="recommend" value="Likely" required #recommend="ngModel" ngModel /> &nbsp;
+        <label for="likely" style="color: blue;">Likely</label> &nbsp; &nbsp;
+        <input type="radio" name="recommend" value="Very Likely" required #recommend="ngModel" ngModel /> &nbsp;
+        <label for="veryLikely" style="color: darkgreen;">
+          Very Likely
+        </label>   
+      </div>
+      <br>
+
+    <label for="review">Share your comments :</label>
+    <div class="form-group">
+        <textarea class="form-control" name="review" id="review" #review='ngModel' ngModel rows="3"
+        placeholder="Add comments here....">
+        </textarea>
+    </div>
+    
+    <div class="form-group"> 
+      <button class=" btn btn-success float-left" type="submit"  [disabled]="feedbackForm.invalid">
+        Submit
+      </button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      
+      <button class="btn btn-danger" type="reset" >
+        Reset
+      </button>
+    </div>
+
+    <div class="form-control" style="background-color: red;" *ngIf="message">
+      <i style="color: white;">
+        {{ message }}
+      </i>
+    </div>
+    <div class="form-control" style="background-color: green;" *ngIf="message1">
+      <i style="color: white;">
+        {{ message1 }}
+      </i>
+    </div>
+
+    </form>
+  </div>
+
+  </div>
+    
+</div>
+</div>
+    
