@@ -7,8 +7,8 @@ import { BookingRefundDTO } from './components/refund-policies/refund-policies.c
 })
 export class RefundServiceService {
 
-  myURL = 'http://localhost:9090/api';
-  myURL1="http://localhost:8084/api";
+ // myURL = 'http://localhost:9090/AirlineRefundPolicy/api';
+  myURL1="http://localhost:9090/AirlineRefundPolicy/api";
 
   constructor(private http : HttpClient) { }
 
