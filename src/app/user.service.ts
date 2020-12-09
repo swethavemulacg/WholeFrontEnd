@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 })
 export class UserService {
 
-  myURL = 'http://localhost:9090/arp-user/api';
+  myURL = 'http://ec2-3-129-128-11.us-east-2.compute.amazonaws.com:9090/arp-user/api';
 
   constructor(private http : HttpClient, private router : Router) { }
   
